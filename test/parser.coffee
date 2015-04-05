@@ -43,7 +43,7 @@ describe 'VASTParser', ->
             @response.ads[0].errorURLTemplates.should.eql ["http://example.com/wrapper-error", "http://example.com/error"]
 
         it 'should have merged impression URLs', =>
-            @response.ads[0].impressionURLTemplates.should.eql ["http://example.com/wrapper-impression", "http://example.com/impression1", "http://example.com/impression2", "http://example.com/impression3"]
+            @response.ads[0].impressionURLTemplates.should.eql ["http://example.com/wrapper-impression", 'http://example.com/wrapper-extension', "http://example.com/impression1", "http://example.com/impression2", "http://example.com/impression3"]
 
         it 'should have two creatives', =>
             @response.ads[0].creatives.should.have.length 2
@@ -81,7 +81,7 @@ describe 'VASTParser', ->
             it 'should have 2 urls for complete event', =>
                 linear.trackingEvents['complete'].should.eql ['http://example.com/complete', 'http://example.com/wrapper-complete']
 
-            it 'should have 2 urls for clicktracking', =>
+            it 'should have 3 urls for clicktracking', =>
                 linear.videoClickTrackingURLTemplates.should.eql ['http://example.com/clicktracking', 'http://example.com/wrapper-clicktracking']
 
         #Companions

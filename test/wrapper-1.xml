@@ -41,6 +41,13 @@
         <Extension type="Behavior">
           <Behavior type="thirdPartyAdServer">unknown</Behavior>
         </Extension>
+        <Extension type="activeview">
+          <CustomTracking>
+            <Tracking event="viewable_impression">
+            <![CDATA[http://example.com/wrapper-start]]>
+            </Tracking>
+            </CustomTracking>
+        </Extension>
       </Extensions>
     </Wrapper>
   </Ad>

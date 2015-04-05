@@ -23,7 +23,7 @@ class VASTParser
         if not cb
             cb = options if typeof options is 'function'
             options = {}
-        
+
         @_parse url, null, options, (err, response) ->
             cb(response)
 
@@ -50,7 +50,7 @@ class VASTParser
         parentURLs ?= []
         parentURLs.push url
 
-        
+
         URLHandler.get url, options, (err, xml) =>
             return cb(err) if err?
 
@@ -199,6 +199,13 @@ class VASTParser
                 when "Impression"
                     ad.impressionURLTemplates.push (@parseNodeText node) if @isUrl node
 
+                when "Extensions"
+                    for extensionElement in @childsByName(node, "Extension")
+                        for customtrackingElement in @childsByName(extensionElement, "CustomTracking")
+                            for clickTrackingElement in @childsByName(customtrackingElement, "Tracking")
+                                ad.impressionURLTemplates.push (@parseNodeText clickTrackingElement) if @isUrl node
+                                # ad.trackingEvents = @parseNodeText(clickTrackingElement)
+
                 when "Creatives"
                     for creativeElement in @childsByName(node, "Creative")
                         for creativeTypeElement in creativeElement.childNodes
@@ -259,19 +266,19 @@ class VASTParser
                 mediaFile.maxBitrate = parseInt mediaFileElement.getAttribute("maxBitrate") or 0
                 mediaFile.width = parseInt mediaFileElement.getAttribute("width") or 0
                 mediaFile.height = parseInt mediaFileElement.getAttribute("height") or 0
-                
+
                 scalable = mediaFileElement.getAttribute("scalable")
                 if scalable and typeof scalable is "string"
                   scalable = scalable.toLowerCase()
                   if scalable is "true" then mediaFile.scalable = true
                   else if scalable is "false" then mediaFile.scalable = false
-                
+
                 maintainAspectRatio = mediaFileElement.getAttribute("maintainAspectRatio")
                 if maintainAspectRatio and typeof maintainAspectRatio is "string"
                   maintainAspectRatio = maintainAspectRatio.toLowerCase()
                   if maintainAspectRatio is "true" then mediaFile.maintainAspectRatio = true
                   else if maintainAspectRatio is "false" then mediaFile.maintainAspectRatio = false
-                
+
                 creative.mediaFiles.push mediaFile
 
         return creative
