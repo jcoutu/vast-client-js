@@ -825,7 +825,7 @@ VASTParser = (function() {
   };
 
   VASTParser.parseInLineElement = function(inLineElement) {
-    var ad, creative, creativeElement, creativeTypeElement, node, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
+    var ad, clickTrackingElement, creative, creativeElement, creativeTypeElement, customtrackingElement, extensionElement, node, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
     ad = new VASTAd();
     _ref = inLineElement.childNodes;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -841,13 +841,30 @@ VASTParser = (function() {
             ad.impressionURLTemplates.push(this.parseNodeText(node));
           }
           break;
-        case "Creatives":
-          _ref1 = this.childsByName(node, "Creative");
+        case "Extensions":
+          _ref1 = this.childsByName(node, "Extension");
           for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-            creativeElement = _ref1[_j];
-            _ref2 = creativeElement.childNodes;
+            extensionElement = _ref1[_j];
+            _ref2 = this.childsByName(extensionElement, "CustomTracking");
             for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
-              creativeTypeElement = _ref2[_k];
+              customtrackingElement = _ref2[_k];
+              _ref3 = this.childsByName(customtrackingElement, "Tracking");
+              for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
+                clickTrackingElement = _ref3[_l];
+                if (this.isUrl(node)) {
+                  ad.impressionURLTemplates.push(this.parseNodeText(clickTrackingElement));
+                }
+              }
+            }
+          }
+          break;
+        case "Creatives":
+          _ref4 = this.childsByName(node, "Creative");
+          for (_m = 0, _len4 = _ref4.length; _m < _len4; _m++) {
+            creativeElement = _ref4[_m];
+            _ref5 = creativeElement.childNodes;
+            for (_n = 0, _len5 = _ref5.length; _n < _len5; _n++) {
+              creativeTypeElement = _ref5[_n];
               switch (creativeTypeElement.nodeName) {
                 case "Linear":
                   creative = this.parseCreativeLinearElement(creativeTypeElement);
