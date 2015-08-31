@@ -454,6 +454,7 @@ VASTCreativeLinear = (function(_super) {
     this.mediaFiles = [];
     this.videoClickThroughURLTemplate = null;
     this.videoClickTrackingURLTemplates = [];
+    this.AdParameters = "";
   }
 
   return VASTCreativeLinear;
@@ -886,7 +887,7 @@ VASTParser = (function() {
   };
 
   VASTParser.parseCreativeLinearElement = function(creativeElement) {
-    var clickTrackingElement, creative, eventName, maintainAspectRatio, mediaFile, mediaFileElement, mediaFilesElement, percent, scalable, skipOffset, trackingElement, trackingEventsElement, trackingURLTemplate, videoClicksElement, _base, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
+    var AdParameters, clickTrackingElement, creative, eventName, maintainAspectRatio, mediaFile, mediaFileElement, mediaFilesElement, percent, scalable, skipOffset, trackingElement, trackingEventsElement, trackingURLTemplate, videoClicksElement, _base, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
     creative = new VASTCreativeLinear();
     creative.duration = this.parseDuration(this.parseNodeText(this.childByName(creativeElement, "Duration")));
     if (creative.duration === -1 && creativeElement.parentNode.parentNode.parentNode.nodeName !== 'Wrapper') {
@@ -926,6 +927,8 @@ VASTParser = (function() {
         }
       }
     }
+    AdParameters = this.parseNodeText(this.childByName(creativeElement, "AdParameters")) || "";
+    creative.AdParameters = String(AdParameters).replace(/&quot;/g, '"').replace(/&#39;/g, '\'').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
     _ref3 = this.childsByName(creativeElement, "MediaFiles");
     for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
       mediaFilesElement = _ref3[_l];

@@ -84,6 +84,10 @@ describe 'VASTParser', ->
             it 'should have 3 urls for clicktracking', =>
                 linear.videoClickTrackingURLTemplates.should.eql ['http://example.com/clicktracking', 'http://example.com/wrapper-clicktracking']
 
+            it 'should have a ad parameters', =>
+                stuff = unescape(linear.AdParameters)
+                stuff.should.eql "<Stuff>"
+
         #Companions
         describe '#Companions', ->
             companions = null

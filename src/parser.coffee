@@ -252,6 +252,10 @@ class VASTParser
                     creative.trackingEvents[eventName] ?= []
                     creative.trackingEvents[eventName].push trackingURLTemplate
 
+        AdParameters = @parseNodeText(@childByName(creativeElement, "AdParameters")) or ""
+        creative.AdParameters = String(AdParameters).replace(/&quot;/g, '"').replace(/&#39;/g, '\'').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace /&amp;/g, '&'
+
+
         for mediaFilesElement in @childsByName(creativeElement, "MediaFiles")
             for mediaFileElement in @childsByName(mediaFilesElement, "MediaFile")
                 mediaFile = new VASTMediaFile()
