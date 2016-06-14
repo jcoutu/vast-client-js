@@ -22,6 +22,12 @@
             <TrackingEvents>
               <Tracking event="start"><![CDATA[http://example.com/wrapper-start]]></Tracking>
               <Tracking event="complete"><![CDATA[http://example.com/wrapper-complete]]></Tracking>
+              <Tracking event="skip">
+              <![CDATA[http://example.com/wrapper-skip]]>
+              </Tracking>
+              <Tracking event="progress" offset="00:00:15">
+              <![CDATA[http://example.com/wrapper-progress]]>
+              </Tracking>              
             </TrackingEvents>
             <VideoClicks>
               <ClickTracking><![CDATA[http://example.com/wrapper-clicktracking]]></ClickTracking>

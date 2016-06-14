@@ -242,15 +242,15 @@ describe 'VASTTracker', ->
                 _eventsSent.should.eql ['closeLinear', [ 'http://example.com/closelinear']]
 
 
-        describe '#skip', =>
+        #describe '#skip', =>
 
-            before (done) =>
-                _eventsSent = []
-                @Tracker.skip()
-                done()
+            #before (done) =>
+            #    _eventsSent = []
+            #    @Tracker.skip()
+            #    done()
 
-            it 'should have sent skip event', =>
-                _eventsSent.should.eql ['skip']
+            #it 'should have sent skip event', =>
+            #    _eventsSent.should.eql ['skip']
 
 
         describe '#click', =>

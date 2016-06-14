@@ -83,7 +83,7 @@ describe 'VASTParser', ->
                 mediaFile.fileURL.should.equal "http://example.com/asset.mp4"
 
             it 'should have 6 tracking events', =>
-                linear.trackingEvents.should.have.keys 'start', 'close', 'midpoint', 'complete', 'firstQuartile', 'thirdQuartile'
+                linear.trackingEvents.should.have.keys 'start', 'close', 'midpoint', 'complete', 'firstQuartile', 'thirdQuartile', 'skip', 'progress'
 
             it 'should have 2 urls for start event', =>
                 linear.trackingEvents['start'].should.eql ['http://example.com/start', 'http://example.com/wrapper-start']
