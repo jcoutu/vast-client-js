@@ -308,6 +308,7 @@ var VASTAd;
 VASTAd = (function() {
   function VASTAd() {
     this.errorURLTemplates = [];
+    this.surveyURLTemplates = [];
     this.impressionURLTemplates = [];
     this.creatives = [];
   }
@@ -832,6 +833,11 @@ VASTParser = (function() {
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       node = _ref[_i];
       switch (node.nodeName) {
+        case "Survey":
+          if (this.isUrl(node)) {
+            ad.surveyURLTemplates.push(this.parseNodeText(node));
+          }
+          break;
         case "Error":
           if (this.isUrl(node)) {
             ad.errorURLTemplates.push(this.parseNodeText(node));

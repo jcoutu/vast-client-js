@@ -1,6 +1,7 @@
 class VASTAd
     constructor: ->
         @errorURLTemplates = []
+        @surveyURLTemplates = []
         @impressionURLTemplates = []
         @creatives = []
 

@@ -193,6 +193,9 @@ class VASTParser
 
         for node in inLineElement.childNodes
             switch node.nodeName
+                when "Survey"
+                    ad.surveyURLTemplates.push (@parseNodeText node) if @isUrl node
+
                 when "Error"
                     ad.errorURLTemplates.push (@parseNodeText node) if @isUrl node
 

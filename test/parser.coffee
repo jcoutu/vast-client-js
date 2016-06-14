@@ -42,6 +42,9 @@ describe 'VASTParser', ->
         it 'should have merged wrapped ad error URLs', =>
             @response.ads[0].errorURLTemplates.should.eql ["http://example.com/wrapper-error", "http://example.com/error"]
 
+        it 'should have merged wrapped ad error URLs', =>
+            @response.ads[0].surveyURLTemplates.should.eql ["http://example.com/survey"]
+
         it 'should have merged impression URLs', =>
             @response.ads[0].impressionURLTemplates.should.eql ["http://example.com/wrapper-impression", 'http://example.com/wrapper-extension', "http://example.com/impression1", "http://example.com/impression2", "http://example.com/impression3"]
 

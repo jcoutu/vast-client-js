@@ -6,6 +6,7 @@
       <AdSystem>AdServer</AdSystem>
       <AdTitle>Title</AdTitle>
       <Error><![CDATA[http://example.com/error]]></Error>
+      <Survey><![CDATA[http://example.com/survey]]></Survey>
       <Impression><![CDATA[http://example.com/impression1]]></Impression>
       <Impression><![CDATA[http://example.com/impression2]]></Impression>
       <Impression><![CDATA[http://example.com/impression3]]></Impression>
