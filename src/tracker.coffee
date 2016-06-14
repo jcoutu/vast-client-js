@@ -15,7 +15,7 @@ class VASTTracker extends EventEmitter
         @emitAlwaysEvents = [
             'creativeView',
             'start', 'firstQuartile', 'midpoint', 'thirdQuartile', 'complete',
-            'resume', 'pause', 'rewind', 'skip', 'closeLinear', 'close'
+            'resume', 'pause', 'rewind', 'closeLinear', 'close'
         ]
         # Duplicate the creative's trackingEvents property so we can alter it
         for eventName, events of creative.trackingEvents
@@ -107,9 +107,9 @@ class VASTTracker extends EventEmitter
     stop: ->
         @track(if @linear then "closeLinear" else "close")
 
-    skip: ->
-        @track "skip"
-        @trackingEvents = []
+    #skip: ->
+    #    @track "skip"
+    #    @trackingEvents = []
 
     click: ->
         if @clickTrackingURLTemplates?.length

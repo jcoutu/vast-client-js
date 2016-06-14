@@ -229,8 +229,6 @@ class VASTParser
                                     creative = @parseCompanionAd creativeTypeElement
                                     if creative
                                         ad.creatives.push creative
-        console.log("here")
-        console.log(ad)
         return ad
 
     @parseCreativeLinearElement: (creativeElement) ->
