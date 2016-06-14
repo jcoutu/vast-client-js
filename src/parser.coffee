@@ -123,6 +123,8 @@ class VASTParser
                             for wrappedAd in wrappedResponse.ads
                                 wrappedAd.errorURLTemplates = ad.errorURLTemplates.concat wrappedAd.errorURLTemplates
                                 wrappedAd.impressionURLTemplates = ad.impressionURLTemplates.concat wrappedAd.impressionURLTemplates
+                                wrappedAd.abandonURLTemplates = ad.abandonURLTemplates.concat wrappedAd.abandonURLTemplates
+                                wrappedAd.viewableImpressionURLTemplates = ad.viewableImpressionURLTemplates.concat wrappedAd.viewableImpressionURLTemplates
 
                                 if ad.trackingEvents?
                                     for creative in wrappedAd.creatives
@@ -206,9 +208,13 @@ class VASTParser
                     for extensionElement in @childsByName(node, "Extension")
                         for customtrackingElement in @childsByName(extensionElement, "CustomTracking")
                             for clickTrackingElement in @childsByName(customtrackingElement, "Tracking")
-                                ad.impressionURLTemplates.push (@parseNodeText clickTrackingElement) if @isUrl node
-                                # ad.trackingEvents = @parseNodeText(clickTrackingElement)
-
+                                eventName = clickTrackingElement.getAttribute("event")
+                                if eventName == "viewable_impression"
+                                    ad.viewableImpressionURLTemplates.push (@parseNodeText clickTrackingElement) if @isUrl node
+                                else if eventName == "abandon"
+                                    ad.abandonURLTemplates.push (@parseNodeText clickTrackingElement) if @isUrl node
+                                else
+                                   ad.impressionURLTemplates.push (@parseNodeText clickTrackingElement) if @isUrl node
                 when "Creatives"
                     for creativeElement in @childsByName(node, "Creative")
                         for creativeTypeElement in creativeElement.childNodes
@@ -223,7 +229,8 @@ class VASTParser
                                     creative = @parseCompanionAd creativeTypeElement
                                     if creative
                                         ad.creatives.push creative
-
+        console.log("here")
+        console.log(ad)
         return ad
 
     @parseCreativeLinearElement: (creativeElement) ->

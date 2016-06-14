@@ -36,7 +36,10 @@
         <Extension type="activeview">
           <CustomTracking>
             <Tracking event="viewable_impression">
-            <![CDATA[http://example.com/wrapper-extension]]>
+              <![CDATA[http://example.com/wrapper-extension]]>
+            </Tracking>
+            <Tracking event="abandon">
+              <![CDATA[http://example.com/wrapper-extension]]>
             </Tracking>
             </CustomTracking>
         </Extension>

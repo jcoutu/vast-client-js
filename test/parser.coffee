@@ -46,7 +46,14 @@ describe 'VASTParser', ->
             @response.ads[0].surveyURLTemplates.should.eql ["http://example.com/survey"]
 
         it 'should have merged impression URLs', =>
-            @response.ads[0].impressionURLTemplates.should.eql ["http://example.com/wrapper-impression", 'http://example.com/wrapper-extension', "http://example.com/impression1", "http://example.com/impression2", "http://example.com/impression3"]
+            @response.ads[0].impressionURLTemplates.should.eql ["http://example.com/wrapper-impression", "http://example.com/impression1", "http://example.com/impression2", "http://example.com/impression3"]
+
+        it 'should have viewableImpressionURLTemplates URLs', =>
+            @response.ads[0].viewableImpressionURLTemplates.should.eql ["http://example.com/wrapper-extension"]
+
+        it 'should have abandonURLTemplates URLs', =>
+            console.log(@response.ads[0])
+            @response.ads[0].abandonURLTemplates.should.eql ["http://example.com/wrapper-extension"]
 
         it 'should have two creatives', =>
             @response.ads[0].creatives.should.have.length 2
